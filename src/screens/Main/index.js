@@ -1,10 +1,10 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { reducer } from '../../redux/reducers';
+import { PaymentReducer } from '../../redux/reducers/PaymentReducer';
 
 import {
   Container,
@@ -16,13 +16,11 @@ import {
 } from './styles';
 
 export default function Main({ navigation }) {
-  const initialState = {
-    payment: [],
-    error: '',
-    loading: true,
-  };
+  const payment = useSelector(state => state.payment);
+  const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -42,7 +40,7 @@ export default function Main({ navigation }) {
   return (
     <Container>
       <List
-        data={state.payment}
+        data={payment}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <View>
