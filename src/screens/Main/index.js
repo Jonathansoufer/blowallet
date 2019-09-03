@@ -17,12 +17,12 @@ import {
 export default function Main({ navigation }) {
   const dispatch = useDispatch();
 
-  const payment = useSelector(state => state.payment);
+  const data = useSelector(state => state.data);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error);
 
   useEffect(() => {
-    dispatch(PaymentActions.loadPaymentsRequest());
+    dispatch(PaymentActions.loadPaymentsSuccess());
   }, []);
 
   // loadPayments = async () => {
@@ -32,7 +32,7 @@ export default function Main({ navigation }) {
   return (
     <Container>
       <List
-        data={payment}
+        data={data}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <View>

@@ -10,19 +10,20 @@ export const Types = {
  *Reducer
  */
 const INITIAL_STATE = {
-  payments: [],
+  data: [],
   loading: false,
   error: false,
 };
 
 export default function payments(state = INITIAL_STATE, action) {
+  console.log('reducer', action);
   switch (action.type) {
     case Types.LOAD_PAYMENTS_REQUEST:
       return { ...state, loading: true };
     case Types.LOAD_PAYMENTS_SUCCESS:
       return {
         ...state,
-        payments: action.payload.data,
+        data: action.payload.data,
         loading: false,
         error: false,
       };
