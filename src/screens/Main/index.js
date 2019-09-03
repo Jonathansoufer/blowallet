@@ -16,17 +16,16 @@ import {
 
 export default function Main({ navigation }) {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.data);
-  const loading = useSelector(state => state.loading);
-  const error = useSelector(state => state.error);
+  const paymentList = useSelector(state => state.data);
 
   useEffect(() => {
     dispatch(PaymentActions.loadPaymentsRequest());
   }, []);
+
   return (
     <Container>
       <List
-        data={data}
+        data={paymentList}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <View>

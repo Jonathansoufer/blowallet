@@ -9,27 +9,28 @@ export const Types = {
 /**
  *Reducer
  */
-const INITIAL_STATE = {
+const initialState = {
   data: [],
-  loading: false,
+  loading: '',
   error: false,
 };
 
-export default function indexPayments(state = INITIAL_STATE, action) {
+export default function indexPayments(state = initialState, action) {
   console.log('reducer', action);
-  console.log('initialData', state.data);
   switch (action.type) {
     case Types.LOAD_PAYMENTS_REQUEST:
-      return { loading: true };
+      return { ...state, loading: 'request' };
     case Types.LOAD_PAYMENTS_SUCCESS:
+      console.log('initialData', state.loading);
       return {
         ...state,
         data: action.payload.data,
-        loading: false,
+        loading: 'success',
         error: false,
       };
+
     case Types.LOAD_PAYMENTS_FAILURE:
-      return { ...state, loading: false, error: true };
+      return { ...state, loading: 'failure', error: true };
     default:
       return state;
   }
