@@ -15,8 +15,9 @@ import {
 } from './styles';
 
 export default function Main({ navigation }) {
+  const data = useSelector(state => state.data);
+  console.log(data);
   const dispatch = useDispatch();
-  const paymentList = useSelector(state => state.data);
 
   useEffect(() => {
     dispatch(PaymentActions.loadPaymentsRequest());
@@ -25,7 +26,7 @@ export default function Main({ navigation }) {
   return (
     <Container>
       <List
-        data={paymentList}
+        data={data}
         keyExtractor={item => String(item.id)}
         renderItem={({ item }) => (
           <View>

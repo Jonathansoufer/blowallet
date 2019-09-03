@@ -11,7 +11,7 @@ export const Types = {
  */
 const initialState = {
   data: [],
-  loading: '',
+  loading: false,
   error: false,
 };
 
@@ -19,18 +19,16 @@ export default function indexPayments(state = initialState, action) {
   console.log('reducer', action);
   switch (action.type) {
     case Types.LOAD_PAYMENTS_REQUEST:
-      return { ...state, loading: 'request' };
+      return { ...state, loading: true };
     case Types.LOAD_PAYMENTS_SUCCESS:
-      console.log('initialData', state.loading);
       return {
         ...state,
         data: action.payload.data,
-        loading: 'success',
+        loading: false,
         error: false,
       };
-
     case Types.LOAD_PAYMENTS_FAILURE:
-      return { ...state, loading: 'failure', error: true };
+      return { ...state, loading: false, error: true };
     default:
       return state;
   }
