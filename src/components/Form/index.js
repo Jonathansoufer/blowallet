@@ -3,7 +3,12 @@ import { Formik } from 'formik';
 
 import React, { Component, Fragment } from 'react';
 import { TextInput, Text, Button, Alert } from 'react-native';
-import { PaymentText, PaymentFormView } from './styles';
+import {
+  PaymentText,
+  PaymentFormView,
+  AddButton,
+  AddButtonText,
+} from './styles';
 
 export default function Form() {
   return (
@@ -42,7 +47,7 @@ export default function Form() {
               onBlur={() => setFieldTouched('type')}
               placeholder="Payment Type"
             />
-            {touched.email && errors.email && (
+            {touched.type && errors.type && (
               <Text
                 style={{
                   fontSize: 12,
@@ -143,11 +148,9 @@ export default function Form() {
               </Text>
             )}
           </PaymentFormView>
-          <Button
-            title="ADD PAYMENT"
-            disabled={!isValid}
-            onPress={handleSubmit}
-          />
+          <AddButton disabled={!isValid} onPress={handleSubmit}>
+            <AddButtonText>Add Payment</AddButtonText>
+          </AddButton>
         </>
       )}
     </Formik>

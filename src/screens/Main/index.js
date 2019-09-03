@@ -1,10 +1,9 @@
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { PaymentReducer } from '../../redux/reducers/PaymentReducer';
+import { Creators as PaymentActions } from '../../redux/ducks/payments';
 
 import {
   Container,
@@ -16,26 +15,19 @@ import {
 } from './styles';
 
 export default function Main({ navigation }) {
+  const dispatch = useDispatch();
+
   const payment = useSelector(state => state.payment);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    axios
-      .get(
-        'https://gist.githubusercontent.com/AbdoulNdiaye/b253a0a7b093cd5e775c85261780cff5/raw/3d0d14c6e21f6f758a2968f6ed1d61a9bc3594bb/transactions.json'
-      )
-      .then(res =>
-        dispatch({
-          type: 'LOAD_PAYMENTS',
-          payload: res.data.data,
-          loading: false,
-        })
-      )
-      .catch(() => dispatch({ type: 'LOAD_ERROR' }));
+    dispatch(PaymentActions.loadPaymentsRequest());
   }, []);
+
+  // loadPayments = async () => {
+  //   dispatch(PaymentActions.loadPaymentsRequest());
+  // };
 
   return (
     <Container>
@@ -76,6 +68,10 @@ export default function Main({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
+        // onRefresh={() => {
+        //   loadPayments();
+        // }}
+        // refreshing={loading}
       />
     </Container>
   );
