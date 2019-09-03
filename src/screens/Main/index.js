@@ -16,19 +16,13 @@ import {
 
 export default function Main({ navigation }) {
   const dispatch = useDispatch();
-
   const data = useSelector(state => state.data);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error);
 
   useEffect(() => {
-    dispatch(PaymentActions.loadPaymentsSuccess());
+    dispatch(PaymentActions.loadPaymentsRequest());
   }, []);
-
-  // loadPayments = async () => {
-  //   dispatch(PaymentActions.loadPaymentsRequest());
-  // };
-
   return (
     <Container>
       <List

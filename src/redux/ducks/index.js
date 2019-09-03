@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 
-import payments from './payments';
+import indexPayments from './payments';
 
-export default combineReducers({ payments });
+export default combineReducers({ indexPayments });

@@ -15,11 +15,12 @@ const INITIAL_STATE = {
   error: false,
 };
 
-export default function payments(state = INITIAL_STATE, action) {
+export default function indexPayments(state = INITIAL_STATE, action) {
   console.log('reducer', action);
+  console.log('initialData', state.data);
   switch (action.type) {
     case Types.LOAD_PAYMENTS_REQUEST:
-      return { ...state, loading: true };
+      return { loading: true };
     case Types.LOAD_PAYMENTS_SUCCESS:
       return {
         ...state,
